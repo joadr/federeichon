@@ -2,7 +2,7 @@
 Here we have all the use cases with the diagram for each user and the respective file for each one of them.
 
 ## Diagram
-![UC Diagram](http://imgur.com/a/tcSYF)
+![UCDiagram](http://i.imgur.com/a/TmjUW)
 
 ## Files
 You can see all the files for each use case in the following link:
