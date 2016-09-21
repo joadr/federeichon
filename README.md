@@ -9,4 +9,4 @@
   * Any Students Federation from all over the world
 * **Main objective:**
   * Develop an aplication for spreading information among the students, encouraging them to participate in crucial decisions through voting and polling and creating new spaces for opinion and descussion with forums.
-* **All the documentation is in the following link: https://github.com/joadr/federeichon/blob/master/docs/README.md**
+* **All the documentation is in the following link: https://github.com/joadr/federeichon/blob/master/docs/**
