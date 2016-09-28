@@ -6,12 +6,14 @@ var Votings = new Mongo.Collection('votings')
 Votings.attachSchema(new SimpleSchema({
   title: {
     type: String,
-    label: 'Título'
+    label: 'Título',
+
   },
   description: {
     type: String,
     label: 'Descripción',
-    optional: true
+    optional: true,
+
   },
   candidates: {
     type: [Object], // Means it'll be an array of objects
@@ -33,7 +35,8 @@ Votings.attachSchema(new SimpleSchema({
   'candidates.$.votes': {
     type: [String],
     label: 'Votos'
-  }
+  },
+  
 }))
 
 export default Votings
