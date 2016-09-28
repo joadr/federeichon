@@ -10,17 +10,17 @@ News.attachSchema(new SimpleSchema({
   },
   body: {
     type: String,
-    label: 'Cuerpo',
+    label: 'Cuerpo'
   },
   createdby: {
     type: String,
     label: 'Autor'
   },
   attachments: {
-    type: [Object]
-    label: 'Adjuntos'
+    type: [Object],
+    label: 'Adjuntos',
     optional: true
-  },
+  }
   
 }))
 
