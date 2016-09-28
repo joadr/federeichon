@@ -29,7 +29,7 @@ Surveys.attachSchema(new SimpleSchema({
   'options.$.votes': {
     type: [String],
     label: 'Votos'
-  },
+  }
   
 }))
 
