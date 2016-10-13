@@ -4,7 +4,6 @@ import muiTheme from './styles/mui-theme'
 import AppBar from 'material-ui/AppBar'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import _ from 'underscore'
-import FlatButton from 'material-ui/FlatButton'
 
 const propTypes = {
 }

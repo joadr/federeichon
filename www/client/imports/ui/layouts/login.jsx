@@ -1,53 +1,52 @@
 import React from 'react'
-import theme from './styles/theme'
-import muiTheme from './styles/mui-theme'
-import AppBar from 'material-ui/AppBar'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import _ from 'underscore'
-import FlatButton from 'material-ui/FlatButton'
+import Layout from './admin'
+import Paper from 'material-ui/Paper'
 
-const propTypes = {
-}
-
-const childContextTypes = {
-  muiTheme: React.PropTypes.object
-}
-
-export default class Layout extends React.Component {
-
+export default class LoginLayout extends Layout {
   constructor (props) {
     super(props)
-
-    this.state = {
-      muiTheme: _.extend(getMuiTheme(theme), muiTheme)
-    }
-
-    this.handleSignIn = this.handleSignIn.bind(this)
+    this.background = 'linear-gradient(to bottom, #2196f3 0%,#4096ee 100%)'
   }
 
-  getChildContext () {
-    return {
-      muiTheme: this.state.muiTheme
-    }
-  }
-
-  handleSignIn () {
-  }
-
-  render () {
+  renderContainer () {
     return (
-      <div>
-        <AppBar
-          title='Federeichon'
-          iconClassNameRight='muidocs-icon-navigation-expand-more'
-          iconElementRight={<FlatButton label='Iniciar sesión' onTouchTap={this.handleSignIn} />}
-        />
-        {this.props.children}
+      <div style={styles.container}>
+        <Paper key='papercontainer' style={styles.paperContainer}>
+          {this.props.children}
+        </Paper>
       </div>
     )
   }
 
+  render () {
+    const backgroundImage = this.background
+    return (
+      <div style={{...styles.root, backgroundImage}}>
+        {this.renderContainer()}
+      </div>
+    )
+  }
 }
 
-Layout.propTypes = propTypes
-Layout.childContextTypes = childContextTypes
+const styles = {
+  root: {
+    backgrondPosition: 'center',
+    backgroundSize: 'cover',
+    position: 'fixed',
+    height: '100%',
+    width: '100%'
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    overflow: 'auto'
+  },
+  paperContainer: {
+    width: '100%',
+    maxWidth: 400,
+    margin: 20,
+    padding: 40
+  }
+}
