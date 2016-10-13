@@ -30,9 +30,11 @@ class NewsList extends React.Component {
       limit: this.state.itemsPerPage
     }
   }
+
   getName () {
   	return 'Diego'
   }
+  
   render () {
   	return (
   		<CollectionTable
