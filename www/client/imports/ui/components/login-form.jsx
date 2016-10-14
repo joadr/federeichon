@@ -1,5 +1,9 @@
 import React from 'react'
-import * as Colors from 'material-ui/styles/colors'
+import {red500} from 'material-ui/styles/colors'
+import autobind from 'autobind-decorator'
+import { Meteor } from 'meteor/meteor'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 // import Logo from '../../components/logo'
 
 const propTypes = {
@@ -21,14 +25,19 @@ export default class LoginForm extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {}
-    this.onError = this.onError.bind(this)
-    this.onSuccess = this.onSuccess.bind(this)
-    this.setContext = this.setContext.bind(this)
+    this.state = {
+      isLoading: false
+    }
   }
 
+  @autobind
   setContext (context) {
     this.context.router.push(`/${context}`)
+  }
+
+  @autobind
+  setLoading (isLoading) {
+    this.setState({isLoading})
   }
 
   checkIsReady () {
@@ -38,14 +47,41 @@ export default class LoginForm extends React.Component {
     }
   }
 
+  @autobind
+  startLogin () {
+    console.log('dead mouse')
+    if (!this.state.email || !this.state.password) {
+      this.onError({ reason: 'Debes completar introducir tu email y contraseña' })
+      return
+    }
+
+    this.refs.email.blur()
+    this.refs.password.blur()
+
+    this.setLoading(true)
+    setTimeout(() => {
+      Meteor.loginWithPassword(this.state.email, this.state.password, (error) => {
+        this.setLoading(false)
+        if (error) {
+          this.onError(error)
+        } else {
+          this.onSuccess()
+        }
+      })
+    }, 400)
+  }
+
+  @autobind
   onSuccess () {
-    if (this.props.children.props.returnPath) {
-      FlowRouter.go(this.props.children.props.returnPath)
+    const {location} = this.context
+    if (location.state && location.state.nextPathname) {
+      this.context.router.replace(location.state.nextPathname)
     } else {
-      FlowRouter.go('my-account')
+      this.context.router.replace('/admin')
     }
   }
 
+  @autobind
   onError (error) {
     if (error.error === 403) {
       if (error.reason === 'Email already exists.') {
@@ -63,25 +99,47 @@ export default class LoginForm extends React.Component {
     console.log('Auth error', error)
   }
 
+  @autobind
+  onKeyDownEmail (event) {
+    if (event.keyCode === 13) {
+      this.refs.password.focus()
+    }
+  }
+
+  @autobind
+  onKeyDownPassword (event) {
+    if (event.keyCode === 13) {
+      this.startLogin()
+    }
+  }
+
   renderLogo () {
     return (
       <div style={styles.logo}>
-        <Logo />
+        Logo
       </div>
     )
   }
 
-  renderForm () {
-    const props = {
-      onSuccess: this.onSuccess,
-      onError: this.onError,
-      setLoading: isLoading => this.setState({isLoading}),
-      isLoading: this.state.isLoading,
-      setContext: this.setContext,
-      token: this.props.token,
-      tos: this.renderTos()
-    }
-    return React.cloneElement(this.props.children, props)
+  renderButton () {
+    return (
+      <RaisedButton
+        label='Entrar'
+        disabled={this.state.isLoading}
+        secondary
+        onTouchTap={this.startLogin}
+        fullWidth
+        style={{ marginTop: 20 }}
+      />
+    )
+  }
+
+  renderMessages () {
+    return (
+      <p style={{fontSize: 14}}>
+        Si no tienes cuenta <a style={{cursor: 'pointer'}} onTouchTap={() => this.setContext('signup')}>registrate</a>. Si olvidaste tu contraseña haz click <a style={{cursor: 'pointer'}} onTouchTap={() => this.setContext('forgot')}>aquí</a>.
+      </p>
+    )
   }
 
   renderTos () {
@@ -92,15 +150,43 @@ export default class LoginForm extends React.Component {
     )
   }
 
+  renderForm () {
+    return (
+      <div>
+        <TextField
+          floatingLabelText='Email'
+          type='email'
+          ref='email'
+          value={this.state.email}
+          onChange={event => this.setState({ email: event.target.value })}
+          fullWidth
+          onKeyDown={this.onKeyDownEmail}
+        />
+        <TextField
+          floatingLabelText='Contraseña'
+          type='password'
+          ref='password'
+          value={this.state.password}
+          onChange={event => this.setState({ password: event.target.value })}
+          fullWidth
+          onKeyDown={this.onKeyDownPassword}
+        />
+        {this.renderButton()}
+      </div>
+    )
+  }
+
   render () {
     this.checkIsReady()
     return (
       <div>
         {this.renderLogo()}
-        <div style={{ color: Colors.red500, marginTop: 10, textAlign: 'center' }}>
+        <div style={{ color: red500, marginTop: 10, textAlign: 'center' }}>
           {this.state.errorMessage}
         </div>
         {this.renderForm()}
+        {this.renderMessages()}
+        {this.renderTos()}
       </div>
     )
   }
@@ -119,5 +205,3 @@ const styles = {
 LoginForm.propTypes = propTypes
 LoginForm.defaultProps = defaultProps
 LoginForm.contextTypes = contextTypes
-
-export default LoginForm

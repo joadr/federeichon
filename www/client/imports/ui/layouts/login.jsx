@@ -1,10 +1,15 @@
 import React from 'react'
-import Layout from './admin'
 import Paper from 'material-ui/Paper'
 
-export default class LoginLayout extends Layout {
+const propTypes = {
+  token: React.PropTypes.string,
+  children: React.PropTypes.any
+}
+
+export default class LoginLayout extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {}
     this.background = 'linear-gradient(to bottom, #2196f3 0%,#4096ee 100%)'
   }
 
@@ -28,6 +33,8 @@ export default class LoginLayout extends Layout {
   }
 }
 
+LoginLayout.propTypes = propTypes
+
 const styles = {
   root: {
     backgrondPosition: 'center',
@@ -50,3 +57,5 @@ const styles = {
     padding: 40
   }
 }
+
+LoginLayout.propTypes = propTypes
