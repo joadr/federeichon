@@ -2,8 +2,8 @@ import React from 'react'
 import Surveys from '../../../../../imports/api/surveys/surveys'
 import CollectionTable from '../../components/collection-table'
 
-class SurveysList extends React.Component {
-	constructor (props) {
+export default class SurveysList extends React.Component {
+  constructor (props) {
     super(props)
     this.state = {
       selector: {$or: [{deleted: false}, {deleted: null}]},
@@ -32,12 +32,12 @@ class SurveysList extends React.Component {
   }
 
   getName () {
-  	return 'Diego'
+    return 'Diego'
   }
 
   render () {
-  	return (
-  		<CollectionTable
+    return (
+      <CollectionTable
         collection={Surveys}
         publication='surveys.index'
         itemComponent={ContractsUserIndexItem}
@@ -45,8 +45,7 @@ class SurveysList extends React.Component {
         fields={this.state.fields}
         headers={['Titulo', 'Descripcion', {name: 'Opciones', func: this.getName}]}
         selector={this.getSelector()}
-        options={this.getOptions()}
-      />
+        options={this.getOptions()} />
     )
   }
 }

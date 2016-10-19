@@ -6,6 +6,7 @@ import news from './news/index'
 import surveys from './surveys/index'
 import votings from './votings/index' */
 import Auth from './auth'
+import Admin from './admin'
 import Home from './home'
 import Root from '../layouts/root'
 
@@ -14,6 +15,7 @@ render((
   <Router history={browserHistory}>
     <Route path='/' component={Root}>
       {Auth}
+      {Admin}
       <IndexRoute component={Home} />
     </Route>
   </Router>

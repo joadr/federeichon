@@ -18,8 +18,8 @@
     "react-router": "^2.6.1",
     "react-tap-event-plugin": "^1.0.0",
     "resolve-pathname": "^2.0.0",
-    "simple-react-form": "^1.6.13",
-    "simple-react-form-material-ui": "^1.6.4",
+    "simple-react-form": "^1.7.3",
+    "simple-react-form-material-ui": "^1.7.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

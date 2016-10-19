@@ -1,9 +1,9 @@
 import React from 'react'
-import News from '../../../../../imports/api/news/news'
-import CollectionTable from '../../components/collection-table'
+import News from '/imports/api/news/news'
+import CollectionTable from '../../../components/collection-table.jsx'
 
-class NewsList extends React.Component {
-	constructor (props) {
+export default class NewsList extends React.Component {
+  constructor (props) {
     super(props)
     this.state = {
       selector: {$or: [{deleted: false}, {deleted: null}]},
@@ -32,21 +32,31 @@ class NewsList extends React.Component {
   }
 
   getName () {
-  	return 'Diego'
+    return 'Diego'
   }
-  
+
   render () {
-  	return (
-  		<CollectionTable
+    return (
+      <CollectionTable
         collection={News}
         publication='news.index'
-        itemComponent={ContractsUserIndexItem}
+        itemComponent={NewsIndexItem}
         filter={this.state.filter}
         fields={this.state.fields}
         headers={['Titulo', 'Cuerpo', {name: 'Creado por', func: this.getName}]}
         selector={this.getSelector()}
-        options={this.getOptions()}
-      />
+        options={this.getOptions()} />
+    )
+  }
+}
+
+import {TableRow, TableRowColumn} from 'material-ui/Table'
+export class NewsIndexItem extends React.Component {
+  render () {
+    return (
+      <TableRow>
+        <TableRowColumn>{this.props.item.title}</TableRowColumn>
+      </TableRow>
     )
   }
 }
