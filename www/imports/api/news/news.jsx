@@ -23,19 +23,20 @@ News.attachSchema(new SimpleSchema({
     }
   },
   attachments: {
-    type: [Object],
+    type: Object,
     label: 'Adjuntos',
     optional: true,
     srf: {
       type: File,
       upload: uploadFunction,
-      delete: deleteFunction,
-      multi: true
+      // delete: deleteFunction,
+      //multi: true
     }
   },
-  createdby: {
+  createdBy: {
     type: String,
     label: 'Autor',
+    optional: true,
     autoValue: function () {
       return this.userId
     },
@@ -44,6 +45,22 @@ News.attachSchema(new SimpleSchema({
     }
   }
 }))
+
+News.allow({
+  insert: function (userId, doc) {
+    // the user must be logged in, and the document must be owned by the user
+    return (userId && doc.createdBy === userId)
+  },
+  update: function (userId, doc, fields, modifier) {
+    // the user must be logged in, and the document must be owned by the user
+    return doc.createdBy === userId
+  },
+  remove: function (userId, doc) {
+    // can only remove your own documents
+    return doc.createdBy === userId
+  },
+  fetch: ['createdBy']
+})
 
 export default News
 

@@ -40,12 +40,23 @@ export default class SurveysList extends React.Component {
       <CollectionTable
         collection={Surveys}
         publication='surveys.index'
-        itemComponent={ContractsUserIndexItem}
+        itemComponent={SurveysIndexItem}
         filter={this.state.filter}
         fields={this.state.fields}
         headers={['Titulo', 'Descripcion', {name: 'Opciones', func: this.getName}]}
         selector={this.getSelector()}
         options={this.getOptions()} />
+    )
+  }
+}
+
+import {TableRow, TableRowColumn} from 'material-ui/Table'
+export class SurveysIndexItem extends React.Component {
+  render () {
+    return (
+      <TableRow>
+        <TableRowColumn>{this.props.item.title}</TableRowColumn>
+      </TableRow>
     )
   }
 }

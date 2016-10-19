@@ -7,9 +7,14 @@ import _ from 'underscore'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import Subheader from '../components/subheader'
-import autobind from 'autobind-decorator'
 
 const propTypes = {
+}
+
+const contextTypes = {
+  userId: React.PropTypes.string,
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
 }
 
 const childContextTypes = {
@@ -38,14 +43,8 @@ export default class Layout extends React.Component {
   handleSignIn () {
   }
 
-  @autobind
-  redirectNewsIndex () {
-    console.log('redirecting...')
-  }
-
-  @autobind
-  redirectNewsCreate () {
-    console.log('redirecting 2...')
+  setContext (context) {
+    this.context.router.push(`/${context}`)
   }
 
   render () {
@@ -54,8 +53,8 @@ export default class Layout extends React.Component {
         <AppBar />
         <Drawer open={this.state.open}>
           <Subheader text='Noticias' />
-          <MenuItem onTouchTap={this.redirectNewsIndex}>Ver Noticias</MenuItem>
-          <MenuItem onTouchTap={this.redirectNewsCreate}>Crear Noticia</MenuItem>
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/news')}>Ver Noticias</MenuItem>
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/news/create')}>Crear Noticia</MenuItem>
         </Drawer>
         <div style={{marginLeft: 256, padding: 10}}>
           {this.props.children}
@@ -68,3 +67,4 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = propTypes
 Layout.childContextTypes = childContextTypes
+Layout.contextTypes = contextTypes

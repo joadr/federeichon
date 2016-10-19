@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import Text from 'simple-react-form-material-ui/lib/text'
 
 var Votings = new Mongo.Collection('votings')
 
@@ -7,13 +8,17 @@ Votings.attachSchema(new SimpleSchema({
   title: {
     type: String,
     label: 'Título',
-
+    srf: {
+      type: Text
+    }
   },
   description: {
     type: String,
     label: 'Descripción',
     optional: true,
-
+    srf: {
+      type: Text
+    }
   },
   candidates: {
     type: [Object], // Means it'll be an array of objects
@@ -22,11 +27,17 @@ Votings.attachSchema(new SimpleSchema({
   // the '.$.' means that is an attribute of an array's object, in case it's just and object, you just write candidates.name
   'candidates.$.name': {
     type: String,
-    label: 'Nombre'
+    label: 'Nombre',
+    srf: {
+      type: Text
+    }
   },
   'candidates.$.description': {
     type: String,
-    label: 'Descripción'
+    label: 'Descripción',
+    srf: {
+      type: Text
+    }
   },
   'candidates.$.members': {
     type: [String],
@@ -35,8 +46,7 @@ Votings.attachSchema(new SimpleSchema({
   'candidates.$.votes': {
     type: [String],
     label: 'Votos'
-  },
-  
+  }
 }))
 
 export default Votings

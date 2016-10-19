@@ -6,8 +6,8 @@ export default class NewsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selector: {$or: [{deleted: false}, {deleted: null}]},
-      fields: ['title', 'body', 'createdby']
+      selector: {},
+      fields: ['title', 'body', 'createdBy']
     }
   }
 
@@ -31,19 +31,15 @@ export default class NewsList extends React.Component {
     }
   }
 
-  getName () {
-    return 'Diego'
-  }
-
   render () {
     return (
       <CollectionTable
         collection={News}
-        publication='news.index'
+        publication='news-index'
         itemComponent={NewsIndexItem}
         filter={this.state.filter}
         fields={this.state.fields}
-        headers={['Titulo', 'Cuerpo', {name: 'Creado por', func: this.getName}]}
+        headers={['Titulo', 'Cuerpo', {name: 'Acciones', styles: {width: '100px'}}]}
         selector={this.getSelector()}
         options={this.getOptions()} />
     )
@@ -51,12 +47,41 @@ export default class NewsList extends React.Component {
 }
 
 import {TableRow, TableRowColumn} from 'material-ui/Table'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton/IconButton'
+import Divider from 'material-ui/Divider'
+import Delete from 'material-ui/svg-icons/action/delete'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
+
+const contextTypes = {
+  userId: React.PropTypes.string,
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+}
+
 export class NewsIndexItem extends React.Component {
   render () {
     return (
       <TableRow>
         <TableRowColumn>{this.props.item.title}</TableRowColumn>
+        <TableRowColumn>{this.props.item.body}</TableRowColumn>
+        <TableRowColumn style={{width: '100px'}}>
+          <IconMenu
+            style={{float: 'right'}}
+            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          >
+            <MenuItem primaryText='Editar' leftIcon={<ModeEdit />} onTouchTap={() => this.context.router.push(`/admin/news/update/${this.props.item._id}`)} />
+            <Divider />
+            <MenuItem primaryText='Borrar' leftIcon={<Delete />} onTouchTap={this.handleDelete} />
+          </IconMenu>
+        </TableRowColumn>
       </TableRow>
     )
   }
 }
+
+NewsIndexItem.contextTypes = contextTypes

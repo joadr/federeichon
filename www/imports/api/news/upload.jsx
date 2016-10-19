@@ -4,7 +4,7 @@ import { Tracker } from 'meteor/tracker'
 export const uploadFunction = function ({ file, onProgress, onReady, onError }) {
   const uploader = _.uniqueId('uploader')
 
-  global.S3.upload({
+  S3.upload({
     files: [file],
     path: 'uploads',
     uploader: uploader
@@ -21,7 +21,7 @@ export const uploadFunction = function ({ file, onProgress, onReady, onError }) 
   })
 
   Tracker.autorun(function () {
-    const file = global.S3.collection.findOne({ uploader })
+    const file = S3.collection.findOne({ uploader })
     if (file) {
       onProgress(file.percent_uploaded * 0.01)
     }

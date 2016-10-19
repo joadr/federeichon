@@ -3,6 +3,12 @@ import { Form } from 'simple-react-form'
 import News from '../../../../../../imports/api/news/news'
 import RaisedButton from 'material-ui/RaisedButton'
 
+const contextTypes = {
+  userId: React.PropTypes.string,
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+}
+
 export default class NewsCreate extends React.Component {
   render () {
     return (
@@ -12,9 +18,12 @@ export default class NewsCreate extends React.Component {
           collection={News}
           type='insert'
           ref='form'
-          onSuccess={(docId) => global.alert('Posted')} />
+          onSuccess={(docId) => this.context.router.push('admin/news')}
+        />
         <RaisedButton label='Create' onTouchTap={() => this.refs.form.submit()} />
       </div>
     )
   }
 }
+
+NewsCreate.contextTypes = contextTypes
