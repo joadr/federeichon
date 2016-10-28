@@ -1,51 +1,29 @@
 import React from 'react'
-import Votings from '../../../../../imports/api/votings/votings'
-import CollectionTable from '../../components/collection-table'
+import { Form } from 'simple-react-form'
+import Votings from '../../../../../../imports/api/votings/votings'
+import RaisedButton from 'material-ui/RaisedButton'
 
-export default class VotingsList extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      selector: {$or: [{deleted: false}, {deleted: null}]},
-      fields: ['title', 'description', 'candidates']
-    }
-  }
+const contextTypes = {
+  userId: React.PropTypes.string,
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+}
 
-  getSelector () {
-    if (!this.state.filter) {
-      return this.state.selector
-    } else {
-      const filters = this.state.fields.map((field) => {
-        var obj = {}
-        obj[field] = new RegExp(`${this.state.filter}.*`, 'i')
-        return obj
-      })
-      return { $and: [{ $or: filters }, this.state.selector] }
-    }
-  }
-
-  getOptions () {
-    return {
-      sort: this.state.sort,
-      limit: this.state.itemsPerPage
-    }
-  }
-
-  getName () {
-    return 'Diego'
-  }
-
+export default class VotingsCreate extends React.Component {
   render () {
     return (
-      <CollectionTable
-        collection={Votings}
-        publication='votings.index'
-        itemComponent={ContractsUserIndexItem}
-        filter={this.state.filter}
-        fields={this.state.fields}
-        headers={['Titulo', 'Descripcion', {name: 'Candidatos', func: this.getName}]}
-        selector={this.getSelector()}
-        options={this.getOptions()} />
+      <div>
+        <h1>Crear Votacion</h1>
+        <Form
+          collection={Votings}
+          type='insert'
+          ref='form'
+          onSuccess={(docId) => this.context.router.push('admin/votings')}
+        />
+        <RaisedButton label='Create' onTouchTap={() => this.refs.form.submit()} />
+      </div>
     )
   }
 }
+
+VotingsCreate.contextTypes = contextTypes

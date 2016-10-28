@@ -1,13 +1,13 @@
 import React from 'react'
-import Votings from '../../../../../imports/api/votings/votings'
-import CollectionTable from '../../components/collection-table'
+import Votings from '../../../../../../imports/api/votings/votings'
+import CollectionTable from '../../../components/collection-table.jsx'
 
-export default class SurveysList extends React.Component {
+export default class VotingsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selector: {$or: [{deleted: false}, {deleted: null}]},
-      fields: ['title', 'description', 'options']
+      selector: {},
+      fields: ['title', 'candidates']
     }
   }
 
@@ -31,19 +31,15 @@ export default class SurveysList extends React.Component {
     }
   }
 
-  getName () {
-    return 'Diego'
-  }
-
   render () {
     return (
       <CollectionTable
         collection={Votings}
-        publication='votings.index'
+        publication='votings-index'
         itemComponent={VotingsIndexItem}
         filter={this.state.filter}
         fields={this.state.fields}
-        headers={['Titulo', 'Descripcion', {name: 'Opciones', func: this.getName}]}
+        headers={['Titulo', 'Candidatos']}
         selector={this.getSelector()}
         options={this.getOptions()} />
     )
@@ -51,12 +47,41 @@ export default class SurveysList extends React.Component {
 }
 
 import {TableRow, TableRowColumn} from 'material-ui/Table'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton/IconButton'
+import Divider from 'material-ui/Divider'
+import Delete from 'material-ui/svg-icons/action/delete'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit'
+
+const contextTypes = {
+  userId: React.PropTypes.string,
+  location: React.PropTypes.object,
+  router: React.PropTypes.object
+}
+
 export class VotingsIndexItem extends React.Component {
   render () {
     return (
       <TableRow>
         <TableRowColumn>{this.props.item.title}</TableRowColumn>
+        <TableRowColumn>{this.props.item.candidates}</TableRowColumn>
+        <TableRowColumn style={{width: '100px'}}>
+          <IconMenu
+            style={{float: 'right'}}
+            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          >
+            <MenuItem primaryText='Editar' leftIcon={<ModeEdit />} onTouchTap={() => this.context.router.push(`/admin/votings/update/${this.props.item._id}`)} />
+            <Divider />
+            <MenuItem primaryText='Borrar' leftIcon={<Delete />} onTouchTap={this.handleDelete} />
+          </IconMenu>
+        </TableRowColumn>
       </TableRow>
     )
   }
 }
+
+VotingsIndexItem.contextTypes = contextTypes
