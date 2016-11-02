@@ -1,6 +1,6 @@
 # Federeichon
 
-### *This project is aiming to solve two main problems that (ussually) Universities' Federations have:*
+### *This project is aiming to solve two main problems that (usually) Universities' Federations have:*
 
 1. *The first one is lack of communication with the students. This could be because they might not know how to do this efficiently or because the University doesn't grant them permition to do so.*
 2. *The second one is the surveying and voting systems that they have, which sometimes could be awfull, old and non-representative.*
