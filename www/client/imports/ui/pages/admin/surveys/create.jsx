@@ -18,7 +18,7 @@ export default class SurveysCreate extends React.Component {
           collection={Surveys}
           type='insert'
           ref='form'
-          onSuccess={(docId) => this.context.router.push('admin/surveys')}
+          onSuccess={(docId) => this.context.router.push('/admin/surveys')}
         />
         <RaisedButton label='Create' onTouchTap={() => this.refs.form.submit()} />
       </div>

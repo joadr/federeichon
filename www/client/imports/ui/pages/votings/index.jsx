@@ -3,7 +3,7 @@ import Votings from '../../../../../imports/api/votings/votings'
 import CollectionTable from '../../components/collection-table'
 
 class VotingsList extends React.Component {
-	constructor (props) {
+  constructor (props) {
     super(props)
     this.state = {
       selector: {$or: [{deleted: false}, {deleted: null}]},
@@ -34,18 +34,18 @@ class VotingsList extends React.Component {
   getName () {
   	return 'Diego'
   }
-  
+
   render () {
   	return (
-  		<CollectionTable
-        collection={Votings}
-        publication='votings.index'
-        itemComponent={ContractsUserIndexItem}
-        filter={this.state.filter}
-        fields={this.state.fields}
-        headers={['Titulo', 'Descripcion', {name: 'Candidatos', func: this.getName}]}
-        selector={this.getSelector()}
-        options={this.getOptions()}
+  		                    <CollectionTable
+    collection={Votings}
+    publication='votings.index'
+    itemComponent={ContractsUserIndexItem}
+    filter={this.state.filter}
+    fields={this.state.fields}
+    headers={['Titulo', 'Descripcion', {name: 'Candidatos', func: this.getName}]}
+    selector={this.getSelector()}
+    options={this.getOptions()}
       />
     )
   }

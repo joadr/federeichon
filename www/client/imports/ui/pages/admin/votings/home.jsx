@@ -66,7 +66,6 @@ export class VotingsIndexItem extends React.Component {
     return (
       <TableRow>
         <TableRowColumn>{this.props.item.title}</TableRowColumn>
-        <TableRowColumn>{this.props.item.candidates}</TableRowColumn>
         <TableRowColumn style={{width: '100px'}}>
           <IconMenu
             style={{float: 'right'}}

@@ -18,7 +18,7 @@ export default class NewsCreate extends React.Component {
           collection={News}
           type='insert'
           ref='form'
-          onSuccess={(docId) => this.context.router.push('admin/news')}
+          onSuccess={(docId) => this.context.router.push('/admin/news')}
         />
         <RaisedButton label='Create' onTouchTap={() => this.refs.form.submit()} />
       </div>

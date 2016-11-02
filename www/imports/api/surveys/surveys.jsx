@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Text from 'simple-react-form-material-ui/lib/text'
+import Array from 'simple-react-form-material-ui/lib/array'
 
 var Surveys = new Mongo.Collection('surveys')
 
@@ -22,7 +23,10 @@ Surveys.attachSchema(new SimpleSchema({
   },
   options: {
     type: [Object],
-    label: 'Opciones'
+    label: 'Opciones',
+    srf: {
+      type: Array
+    }
   },
   'options.$.name': {
     type: String,
@@ -41,9 +45,41 @@ Surveys.attachSchema(new SimpleSchema({
   },
   'options.$.votes': {
     type: [String],
-    label: 'Votos'
+    label: 'Votos',
+    optional: true,
+    srf: {
+      type: Array,
+      omit: true
+    }
+  },
+  createdBy: {
+    type: String,
+    label: 'Autor',
+    optional: true,
+    autoValue: function () {
+      return this.userId
+    },
+    srf: {
+      omit: true
+    }
   }
 }))
+
+Surveys.allow({
+  insert: function (userId, doc) {
+    // the user must be logged in, and the document must be owned by the user
+    return (userId && doc.createdBy === userId)
+  },
+  update: function (userId, doc, fields, modifier) {
+    // the user must be logged in, and the document must be owned by the user
+    return doc.createdBy === userId
+  },
+  remove: function (userId, doc) {
+    // can only remove your own documents
+    return doc.createdBy === userId
+  },
+  fetch: ['createdBy']
+})
 
 export default Surveys
 

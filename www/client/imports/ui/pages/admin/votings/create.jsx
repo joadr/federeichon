@@ -18,7 +18,7 @@ export default class VotingsCreate extends React.Component {
           collection={Votings}
           type='insert'
           ref='form'
-          onSuccess={(docId) => this.context.router.push('admin/votings')}
+          onSuccess={(docId) => this.context.router.push('/admin/votings')}
         />
         <RaisedButton label='Create' onTouchTap={() => this.refs.form.submit()} />
       </div>
