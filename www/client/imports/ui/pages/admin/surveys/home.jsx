@@ -1,5 +1,5 @@
 import React from 'react'
-import Surveys from '../../../../../../imports/api/surveys/surveys'
+import Surveys from '/imports/api/surveys/surveys'
 import CollectionTable from '../../../components/collection-table.jsx'
 
 export default class SurveysList extends React.Component {

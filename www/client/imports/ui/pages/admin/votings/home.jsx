@@ -1,5 +1,5 @@
 import React from 'react'
-import Votings from '../../../../../../imports/api/votings/votings'
+import Votings from '/imports/api/votings/votings'
 import CollectionTable from '../../../components/collection-table.jsx'
 
 export default class VotingsList extends React.Component {
