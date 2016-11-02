@@ -55,6 +55,12 @@ export default class Layout extends React.Component {
           <Subheader text='Noticias' />
           <MenuItem onTouchTap={this.setContext.bind(this, 'admin/news')}>Ver Noticias</MenuItem>
           <MenuItem onTouchTap={this.setContext.bind(this, 'admin/news/create')}>Crear Noticia</MenuItem>
+          <Subheader text='Encuestas' />
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/surveys')}>Ver Encuestas</MenuItem>
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/surveys/create')}>Crear Encuesta</MenuItem>
+          <Subheader text='Votaciones' />
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/votings')}>Ver Votaciones</MenuItem>
+          <MenuItem onTouchTap={this.setContext.bind(this, 'admin/votings/create')}>Crear Votacion</MenuItem>
         </Drawer>
         <div style={{marginLeft: 256, padding: 10}}>
           {this.props.children}

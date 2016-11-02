@@ -1,5 +1,5 @@
 import React from 'react'
-import Votings from '../../../../../../imports/api/votings/votings'
+import Votings from '/imports/api/votings/votings'
 import CollectionTable from '../../../components/collection-table.jsx'
 
 export default class VotingsList extends React.Component {
@@ -66,7 +66,6 @@ export class VotingsIndexItem extends React.Component {
     return (
       <TableRow>
         <TableRowColumn>{this.props.item.title}</TableRowColumn>
-        <TableRowColumn>{this.props.item.candidates}</TableRowColumn>
         <TableRowColumn style={{width: '100px'}}>
           <IconMenu
             style={{float: 'right'}}

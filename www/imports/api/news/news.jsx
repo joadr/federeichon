@@ -28,9 +28,9 @@ News.attachSchema(new SimpleSchema({
     optional: true,
     srf: {
       type: File,
-      upload: uploadFunction,
+      upload: uploadFunction
       // delete: deleteFunction,
-      //multi: true
+      // multi: true
     }
   },
   createdBy: {
