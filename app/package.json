@@ -1,5 +1,5 @@
 {
-  "name": "iOS",
+  "name": "Federeichon",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,9 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "native-base": "^0.5.13",
     "react": "15.3.2",
     "react-native": "0.36.1",
-    "react-native-meteor": "^1.0.1"
+    "react-native-meteor": "^1.0.1",
+    "underscore": "^1.8.3",
+    "underscore.string": "^3.3.4"
   },
   "jest": {
     "preset": "jest-react-native"
@@ -18,8 +21,7 @@
     "babel-jest": "16.0.0",
     "babel-preset-react-native": "1.9.0",
     "jest": "16.0.2",
-    "jest-react-native": "16.0.0",
-    "react-test-renderer": "15.3.2",
-    "whatwg-fetch": "1.0.0"
+    "jest-react-native": "16.1.0",
+    "react-test-renderer": "15.3.2"
   }
 }
