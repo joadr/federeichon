@@ -1,5 +1,6 @@
-//  S3.config = {
-//   key: '',
-//   secret: '',
-//   bucket: ''
-// }
+S3.config = {
+  key: '',
+  secret: '',
+  bucket: ''
+}
+
