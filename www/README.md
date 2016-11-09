@@ -9,6 +9,13 @@ This is the Administrator panel of the Federeichon App. It's made with Meteor fo
 - run `$ meteor`
 - Go to http://localhost:3000 in your browser and it should be up and running
 
+### To access the admin:
+- Once you have access to http://localhost:3000 , you will have to create and admin.
+- Open another terminal or command prompt in the www folder.
+- run `$ meteor shell`, once executed you will be prompt to input code after the `>` sign.
+- type `Accounts.createUser({email: 'username@domain.com', password: 'password'})` with your own admin credentials
+- Now you should be able to login at http://localhost:3000/admin
+
 ### Notes
 - Project uses [React Router](https://github.com/ReactTraining/react-router)
 - Project uses [ES6](http://es6-features.org/)
