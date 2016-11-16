@@ -10,7 +10,7 @@ global.News = News
 global.Surveys = Surveys
 global.Votings = Votings
 
-Meteor.startup(() => {
+/*Meteor.startup(() => {
   Accounts.createUser({email: 'admin@federeichon.com', 'password': 'federeichon-admin'})
 })
-
+*/
