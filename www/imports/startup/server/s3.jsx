@@ -1,6 +1,7 @@
-S3.config = {
+/*S3.config = {
   key: '',
   secret: '',
   bucket: ''
 }
 
+*/

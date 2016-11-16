@@ -62,6 +62,9 @@ const contextTypes = {
 }
 
 export class SurveysIndexItem extends React.Component {
+  handleDelete () {
+    Surveys.remove(this.props.item._id)
+  }
   render () {
     return (
       <TableRow>
@@ -75,7 +78,7 @@ export class SurveysIndexItem extends React.Component {
           >
             <MenuItem primaryText='Editar' leftIcon={<ModeEdit />} onTouchTap={() => this.context.router.push(`/admin/surveys/update/${this.props.item._id}`)} />
             <Divider />
-            <MenuItem primaryText='Borrar' leftIcon={<Delete />} onTouchTap={this.handleDelete} />
+            <MenuItem primaryText='Borrar' leftIcon={<Delete />} onTouchTap={this.handleDelete.bind(this)} />
           </IconMenu>
         </TableRowColumn>
       </TableRow>
