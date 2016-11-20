@@ -2,7 +2,7 @@
  * Federeichon Project App
  * https://github.com/joadr/federeichon
  */
-import App from './js/pages/app'
+import PanelLayout from './js/layouts/panel-layout'
 import { AppRegistry } from 'react-native'
 
-AppRegistry.registerComponent('Federeichon', () => App)
+AppRegistry.registerComponent('Federeichon', () => PanelLayout)
