@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base'
 import { Text, StyleSheet } from 'react-native'
+import theme from '../theme/federeichon-theme'
 
 const propTypes = {
 
@@ -20,22 +21,15 @@ export default class News extends React.Component {
   render () {
     return (
       <Container style={styles.container}>
-        <Header>
+        <Header theme={theme}>
           <Button onPress={() => this.context.drawer.open()} transparent>
             <Icon name='md-menu' />
           </Button>
-          <Title>Federeichon</Title>
+          <Title>Noticias</Title>
         </Header>
         <Content>
           <Text>Holaa csm3!!</Text>
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button transparent>
-              <Icon name='ios-call' />
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     )
   }
