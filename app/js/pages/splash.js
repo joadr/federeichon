@@ -15,11 +15,14 @@ class Splash extends React.Component {
     }
   }
 
+  componentDidMount () {
+    this.props.denyPan()
+  }
+
   componentWillReceiveProps (nextProps) {
     if (_.isEqual(nextProps.status, this.state.status)) {
       return false
     }
-    console.log(nextProps.status)
     this.setState({
       status: nextProps.status,
       userId: nextProps.userId
@@ -32,7 +35,7 @@ class Splash extends React.Component {
     if (this.state.status) {
       if (!this.state.userId) {
         console.log('Going for login')
-        this.props.navigator.push({
+        this.props.navigator.push({ // redirección
           name: 'login'
         })
       } else {

@@ -13,10 +13,17 @@ export default class News extends React.Component {
     }
   }
 
+  componentDidMount () {
+    this.props.acceptPan()
+  }
+
   render () {
     return (
       <Container style={styles.container}>
         <Header>
+          <Button onPress={() => this.context.drawer.open()} transparent>
+            <Icon name='md-menu' />
+          </Button>
           <Title>Federeichon</Title>
         </Header>
         <Content>
@@ -41,3 +48,6 @@ const styles = StyleSheet.create({
 })
 
 News.propTypes = propTypes
+News.contextTypes = {
+  drawer: React.PropTypes.any
+}
