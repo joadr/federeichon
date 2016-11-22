@@ -43,6 +43,18 @@ News.attachSchema(new SimpleSchema({
     srf: {
       omit: true
     }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function () {
+      if (this.isInsert) {
+        return new Date()
+      }
+    },
+    srf: {
+      omit: true
+    }
   }
 }))
 
