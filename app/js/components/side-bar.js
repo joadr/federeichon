@@ -40,10 +40,10 @@ export default class SideBar extends React.Component {
           <ListItem button style={styles.listItem} onPress={() => { this.props.navigate('news') }}>
             <Text>Noticias</Text>
           </ListItem>
-          <ListItem button style={styles.listItem} onPress={() => { this.props.navigate('login') }}>
+          <ListItem button style={styles.listItem} onPress={() => { this.props.navigate('surveys') }}>
             <Text>Encuestas</Text>
           </ListItem>
-          <ListItem button style={styles.listItem}>
+          <ListItem button style={styles.listItem} onPress={() => { this.props.navigate('votings') }}>
             <Text>Votaciones</Text>
           </ListItem>
         </List>
