@@ -4,8 +4,6 @@ import React from 'react'
 import Meteor, { createContainer } from 'react-native-meteor'
 import _ from 'underscore'
 
-Meteor.connect('ws://45.55.141.9/websocket')
-
 class Splash extends React.Component {
   constructor (props) {
     super(props)
@@ -34,7 +32,6 @@ class Splash extends React.Component {
   checkLogin () {
     if (this.state.status) {
       if (!this.state.userId) {
-        console.log('Going for login')
         this.props.navigator.push({ // redirección
           name: 'login'
         })
