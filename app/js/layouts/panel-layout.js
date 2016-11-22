@@ -1,10 +1,13 @@
 import React from 'react'
 import { Drawer } from 'native-base'
-import { Platform, StyleSheet, Dimensions, Navigator } from 'react-native'
+import { Navigator, StatusBar } from 'react-native'
 import SplashScreen from '../pages/splash'
 import Login from '../pages/login'
 import NotFound from '../pages/not-found'
 import News from '../pages/news'
+import SingleNew from '../pages/single-new'
+import Surveys from '../pages/surveys'
+import SingleSurvey from '../pages/single-survey'
 import SideBar from '../components/side-bar'
 
 const propTypes = {
@@ -24,6 +27,7 @@ export default class PanelLayout extends React.Component {
     this.state = {
       acceptPan: false
     }
+    this.renderScene = this.renderScene.bind(this)
   }
 
   openDrawer () {
@@ -39,7 +43,7 @@ export default class PanelLayout extends React.Component {
   }
 
   navigate (route) {
-    this.getNavigator().push({name: route})
+    this.getNavigator().push({ name: route })
     this._drawer.close()
   }
 
@@ -57,7 +61,7 @@ export default class PanelLayout extends React.Component {
 
   // Navigator stuff
   renderScene (route, navigator) {
-    console.log('loading route:', route.name)
+    console.log('loading route:', route.name, route)
     switch (route.name) {
       case 'splash':
         return <SplashScreen navigator={navigator} denyPan={this.denyPan.bind(this)} />
@@ -65,6 +69,12 @@ export default class PanelLayout extends React.Component {
         return <Login navigator={navigator} acceptPan={this.acceptPan.bind(this)} denyPan={this.denyPan.bind(this)} />
       case 'news':
         return <News navigator={navigator} acceptPan={this.acceptPan.bind(this)} />
+      case 'singleNew':
+        return <SingleNew navigator={navigator} id={route.id} />
+      case 'surveys':
+        return <Surveys navigator={navigator} acceptPan={this.acceptPan.bind(this)} />
+      case 'singleSurvey':
+        return <SingleSurvey navigator={navigator} id={route.id} />
       default:
         return <NotFound />
     }
@@ -110,9 +120,13 @@ export default class PanelLayout extends React.Component {
         }}
         negotiatePan
       >
+        <StatusBar
+          backgroundColor='#EE4611'
+          barStyle='light-content'
+         />
         <Navigator
           initialRoute={{name: 'splash', index: 0}}
-          renderScene={this.renderScene.bind(this)}
+          renderScene={this.renderScene}
           configureScene={this.configureScene}
           ref='nav'
         />
@@ -122,50 +136,3 @@ export default class PanelLayout extends React.Component {
 }
 
 PanelLayout.propTypes = propTypes
-
-const deviceHeight = Dimensions.get('window').height
-const deviceWidth = Dimensions.get('window').width
-
-const styles = StyleSheet.create({
-  drawerCover: {
-    alignSelf: 'stretch',
-    // resizeMode: 'cover',
-    height: deviceHeight / 3.5,
-    width: null,
-    position: 'relative',
-    marginBottom: 10
-  },
-  drawerImage: {
-    position: 'absolute',
-    // left: (Platform.OS === 'android') ? 30 : 40,
-    left: (Platform.OS === 'android') ? deviceWidth / 10 : deviceWidth / 9,
-    // top: (Platform.OS === 'android') ? 45 : 55,
-    top: (Platform.OS === 'android') ? deviceHeight / 13 : deviceHeight / 12,
-    width: 210,
-    height: 75,
-    resizeMode: 'cover'
-  },
-  listItemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  iconContainer: {
-    width: 37,
-    height: 37,
-    borderRadius: 18,
-    marginRight: 12,
-    paddingLeft: 11,
-    paddingTop: (Platform.OS === 'android') ? 7 : 5
-  },
-  sidebarIcon: {
-    fontSize: 21,
-    color: '#fff',
-    lineHeight: (Platform.OS === 'android') ? 21 : 25,
-    backgroundColor: 'transparent'
-  },
-  text: {
-    fontWeight: '500',
-    fontSize: 16
-  }
-})
