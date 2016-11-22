@@ -19,6 +19,10 @@ export default class Login extends React.Component {
     }
   }
 
+  componentDidMount () {
+    this.props.denyPan()
+  }
+
   onSubmit () {
     if (_.isEmpty(this.state.user)) {
       this.setState({ userError: true })
@@ -44,6 +48,7 @@ export default class Login extends React.Component {
         }
         this.setState({error: errorMsg, userError: true, passwordError: true})
       } else {
+        this.props.acceptPan()
         this.props.navigator.push({
           name: 'news'
         })

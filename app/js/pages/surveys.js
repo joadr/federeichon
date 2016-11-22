@@ -9,26 +9,22 @@ const propTypes = {
 
 }
 
-class News extends React.Component {
+class Surveys extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
     }
   }
 
-  componentDidMount () {
-    this.props.acceptPan()
-  }
-
   renderNews () {
-    return this.props.news.map((noticia, index) => {
+    return this.props.surveys.map((survey, index) => {
       return (
         <Card key={index}>
-          <CardItem header onPress={() => { this.props.navigator.push({ name: 'singleNew', id: noticia._id }) }}>
-            <Text style={styles.title}>{noticia.title}</Text>
+          <CardItem header onPress={() => { this.props.navigator.push({ name: 'singleSurvey', id: survey._id }) }}>
+            <Text style={styles.title}>{survey.title}</Text>
           </CardItem>
-          <CardItem onPress={() => { this.props.navigator.push({ name: 'singleNew', id: noticia._id }) }}>
-            <Text>{prune(noticia.body, 200)}</Text>
+          <CardItem onPress={() => { this.props.navigator.push({ name: 'singleSurvey', id: survey._id }) }}>
+            <Text>{prune(survey.description, 200)}</Text>
           </CardItem>
         </Card>
       )
@@ -42,7 +38,7 @@ class News extends React.Component {
           <Button onPress={() => this.context.drawer.open()} transparent>
             <Icon name='md-menu' />
           </Button>
-          <Title>Noticias</Title>
+          <Title>Encuestas</Title>
         </Header>
         <Content>
           {this.renderNews()}
@@ -53,14 +49,14 @@ class News extends React.Component {
 }
 
 export default createContainer(() => {
-  const handle = Meteor.subscribe('news-index')
-  const news = Meteor.collection('news').find()
+  const handle = Meteor.subscribe('surveys-index')
+  const surveys = Meteor.collection('surveys').find()
 
   return {
-    newsReady: handle.ready(),
-    news: news
+    surveysReady: handle.ready(),
+    surveys: surveys
   }
-}, News)
+}, Surveys)
 
 const styles = StyleSheet.create({
   container: {
@@ -72,7 +68,7 @@ const styles = StyleSheet.create({
   }
 })
 
-News.propTypes = propTypes
-News.contextTypes = {
+Surveys.propTypes = propTypes
+Surveys.contextTypes = {
   drawer: React.PropTypes.any
 }

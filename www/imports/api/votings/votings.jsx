@@ -2,6 +2,7 @@ import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Text from 'simple-react-form-material-ui/lib/text'
 import Array from 'simple-react-form-material-ui/lib/array'
+import Checkbox from 'simple-react-form-material-ui/lib/checkbox'
 import Tags from 'simple-react-form-material-ui/lib/tags'
 
 var Votings = new Mongo.Collection('votings')
@@ -70,6 +71,26 @@ Votings.attachSchema(new SimpleSchema({
     },
     srf: {
       omit: true
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function () {
+      if (this.isInsert) {
+        return new Date()
+      }
+    },
+    srf: {
+      omit: true
+    }
+  },
+  enabled: {
+    type: Boolean,
+    label: 'Habilitado',
+    optional: true,
+    srf: {
+      type: Checkbox
     }
   }
 }))

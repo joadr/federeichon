@@ -7,10 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "momentjs": "^2.0.0",
     "native-base": "^0.5.13",
     "react": "15.3.2",
     "react-native": "0.36.1",
     "react-native-meteor": "^1.0.1",
+    "simple-react-form": "^1.7.7",
     "underscore": "^1.8.3",
     "underscore.string": "^3.3.4"
   },
